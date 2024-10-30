@@ -3,28 +3,27 @@
 #----------------------------------------------------------------------------------------
 
 rasa init
-# This will create default files like domain.yml, config.yml etc.
-# Choose 'n' when asked to train the model
+### This will create default files like domain.yml, config.yml etc.
+### Choose 'n' when asked to train the model
 
 #----------------------------------------------------------------------------------------
 
-# Step 1: Initial RASA training with default config
+### Step 1: Initial RASA training with default config
 rasa train
 
-# Step 2: Run hyperparameter tuning
+### Step 2: Run hyperparameter tuning
 python diet-hyperparameter-tuning.py
-# This will create best_diet_params.json with optimal parameters
+### This will create best_diet_params.json with optimal parameters
 
-# Step 3: Apply the tuned parameters
-python apply-tuned-parameters.py
-# This will create config_tuned.yml
+### Step 3: Apply the tuned parameters
+python apply-tuned-parameters.py. This will create config_tuned.yml
 
-# Step 4: Train the final model with tuned parameters
+### Step 4: Train the final model with tuned parameters
 rasa train --config config_tuned.yml
 
-#----------------------------------------------------------------------------------------
+###----------------------------------------------------------------------------------------
 
-# Expected directory
+### Expected directory
 your_project/
 ├── data/
 │   └── nlu.yml
@@ -38,7 +37,7 @@ your_project/
 └── apply-tuned-parameters.py
 
 
-#----------------------------------------------------------------------------------------
+###----------------------------------------------------------------------------------------
 
-# Test the model
+### Test the model
 rasa shell nlu
