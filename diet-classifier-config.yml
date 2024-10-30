@@ -1,0 +1,46 @@
+recipe: default.v1
+language: en
+
+pipeline:
+  - name: WhitespaceTokenizer
+  - name: LexicalSyntacticFeaturizer
+  - name: CountVectorsFeaturizer
+  - name: CountVectorsFeaturizer
+    analyzer: char_wb
+    min_ngram: 1
+    max_ngram: 4
+  - name: DIETClassifier
+    epochs: 100
+    entity_recognition: True
+    intent_classification: True
+    evaluate_every_number_of_epochs: 10
+    evaluate_on_number_of_examples: 1000
+    hidden_layers_sizes:
+      text: [256, 128]
+      label: []
+    constrain_similarities: True
+    use_masked_language_model: False
+    tensorboard_log_directory: './logs'
+    checkpoint_model: True
+    bilou_flag: True
+    dynamic_shape: True
+    number_of_transformer_layers: 2
+    transformer_size: 256
+    connection_density: 0.2
+    weight_sparsity: 0.8
+    batch_size: [64, 256]
+    batch_strategy: balanced
+    learning_rate: [0.001, 0.0001]
+    embedding_dimension: 20
+    dense_dimension: 100
+    number_of_negative_examples: 20
+    split_entities_by_comma: True
+    max_tokens: 1024
+    use_gpu: True  # Set to False if no GPU available
+
+policies:
+  - name: MemoizationPolicy
+  - name: RulePolicy
+  - name: TEDPolicy
+    max_history: 5
+    epochs: 100
